@@ -57,7 +57,7 @@ app.use("/api/", insurenceRoute);
 app.use("/api/userdata/", userdata);
 
 
-app.post('/create-checkout-session', async (req, res) => {
+app.post('/api/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     line_items: [
