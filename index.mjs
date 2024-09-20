@@ -37,8 +37,8 @@ cors(app);
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    //"https://insurance-frontend-blue.vercel.app",
-    //"https://veygostore.co.uk", // Add this origin
+    "https://insurance-frontend-blue.vercel.app",
+    "https://resume-frontend-six.vercel.app", // Add this origin
   ],
   methods: "GET, POST, DELETE, PUT, PATCH, HEAD",
   credentials: true,
