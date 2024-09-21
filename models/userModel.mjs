@@ -42,6 +42,16 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    subscription: {
+      endDate: {
+        type: Date,
+        default: null,
+      },
+      isActive: {
+        type: Boolean,
+        default: false,
+      },
+    },
     // Array of PDFs using the pdfSchema
     pdfs: [pdfSchema],
   },
