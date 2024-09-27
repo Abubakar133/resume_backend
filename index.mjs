@@ -74,7 +74,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
           product_data: {
             name: 'PDF Download',
           },
-          unit_amount: 0, // $5.00
+          unit_amount: 500, // $5.00
         },
         quantity: 1,
       },
