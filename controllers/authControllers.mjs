@@ -118,13 +118,13 @@ const sendMail = async (resetLink, email) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "f201023@cfd.nu.edu.pk",
-      pass: "03074659133A",
+      user: process.env.emailuser,
+      pass: process.env.emailpassword,
     },
   });
 
   const mailOptions = {
-    from: "f201023@cfd.nu.edu.pk",
+    from: process.env.emailuser,
     to: email,
     subject: 'Reset Password',
     text: `Click the link to reset your password: ${resetLink}`, // Plain text body
