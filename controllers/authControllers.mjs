@@ -61,7 +61,7 @@ export const forget = async (req, res) => {
 
     // Send reset link to the user's email
     const resetLink = `${process.env.Backend}/auth/ResetPassword?token=${token}`;
-    
+    console.log(process.env.emailuser);
     console.log(resetLink);
     sendMail(resetLink,email);
     // Here, you would send the resetLink via email (use a service like Nodemailer)
