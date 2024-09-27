@@ -35,11 +35,7 @@ const PORT = process.env.PORT || 5000;
 cors(app);
 // CORS options
 const corsOptions = {
-  origin: [
-    "http://localhost:5173",
-    "https://insurance-frontend-blue.vercel.app",
-    "https://resume-frontend-six.vercel.app", // Add this origin
-  ],
+  origin: "*",
   methods: "GET, POST, DELETE, PUT, PATCH, HEAD",
   credentials: true,
 };
