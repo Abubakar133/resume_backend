@@ -113,8 +113,8 @@ const sendMail = async (resetLink, email) => {
 
   //const email = "mehboobabubaker7@gmail.com";
  
- emailpas ="f201023@cfd.nu.edu.pk";
- password ="03074659133A";
+ const emailpas ="f201023@cfd.nu.edu.pk";
+ const password ="03074659133A";
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
