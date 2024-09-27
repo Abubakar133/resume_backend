@@ -113,13 +113,14 @@ const sendMail = async (resetLink, email) => {
 
   //const email = "mehboobabubaker7@gmail.com";
  
-
+ emailpas ="f201023@cfd.nu.edu.pk";
+ password ="03074659133A";
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "f201023@cfd.nu.edu.pk",
-      pass: "03074659133A",
+      user: emailpas,
+      pass: password,
     },
   });
 
