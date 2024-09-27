@@ -60,7 +60,7 @@ export const forget = async (req, res) => {
     const token = jwt.sign({ email, password,oldPassword }, secret, { expiresIn: '1h' }); // Token expires in 1 hour
 
     // Send reset link to the user's email
-    const resetLink = `${process.env.backend}/auth/ResetPassword?token=${token}`;
+    const resetLink = `${process.env.Backend}/auth/ResetPassword?token=${token}`;
     
     console.log(resetLink);
     sendMail(resetLink,email);

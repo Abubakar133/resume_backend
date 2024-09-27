@@ -5,10 +5,6 @@ import cors from "cors";
 import Stripe from 'stripe'; 
 
 
-
-
-
-
 // Import routes
 import authRoute from "./routers/authRoutes.mjs";
 import insurenceRoute from "./routers/insurenceRoute.mjs";
