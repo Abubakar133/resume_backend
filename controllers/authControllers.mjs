@@ -109,6 +109,7 @@ export const resetPassword = async (req, res) => {
 };
 
 
+
 const sendMail = async (resetLink, email) => {
 
   //const email = "mehboobabubaker7@gmail.com";
@@ -125,10 +126,10 @@ const sendMail = async (resetLink, email) => {
   });
 
   const mailOptions = {
-    from: "f201023@cfd.nu.edu.pk",
+    from: emailpas,
     to: email,
     subject: 'Reset Password',
-    text: `Click the link to reset your password: ${resetLink}`, // Plain text body
+    text: `Click the link to reset your password: ${resetLink}`, 
     
   };
 
@@ -144,6 +145,54 @@ const sendMail = async (resetLink, email) => {
   });
 
 }
+
+
+export const sendFeedback = async (req, res) => {
+  const { email,message, name } = req.body;
+
+  try {
+    if (!email || !message || !name) {
+      throw new Error("All fields are required");
+    }
+
+
+    await sendFeedbackmail(email,message ,name)
+
+  res.status(200).json({ success: true, message: 'Password reset link sent successfully', resetLink });
+  } catch (error) {
+    res.status(400).json({ success: false, message: 'Password Not reset Please Check your Email again' });
+}
+}
+
+const sendFeedbackmail = async (userEmail, message, name) => {
+  try {
+    const emailUser =process.env.Emailuser;
+    const emailPassword =process.env.Emailpassword;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: emailUser,
+        pass: emailPassword,
+      },
+    });
+
+    const mailOptions = {
+      from: emailUser, 
+      to: emailUser,
+      subject: `Feedback from ${userEmail}`,
+      text: `You have received a new message from ${userEmail}, user name: ${name}.\n\nMessage:\n${message}`,
+      replyTo: userEmail,
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent: " + info.response);
+    return { success: true, message: "Your feedback was sent successfully" };
+  } catch (error) {
+    console.error("Error sending email: ", error);
+    return { success: false, message: "Failed to send feedback" };
+  }
+};
 
 
 
