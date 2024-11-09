@@ -16,11 +16,10 @@ class checkoutController {
             }
            console.log(userId);
             
-           var price = 3000 / 100
-           price = price.toFixed(2)
+           
     
                const body = {
-               amount: 99000.00,
+               amount: 12276.00,
                country: 'IS',
                currency: 'ISK',
                language: 'en',
