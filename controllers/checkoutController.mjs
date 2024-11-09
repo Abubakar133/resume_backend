@@ -20,9 +20,9 @@ class checkoutController {
            price = price.toFixed(2)
     
                const body = {
-               amount: 30.00,
+               amount: 99000.00,
                country: 'IS',
-               currency: 'USD',
+               currency: 'ISK',
                language: 'en',
                 metadata: {
                     userId: user._id,

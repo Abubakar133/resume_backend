@@ -141,7 +141,7 @@ app.post('/api/update-subscription', async (req, res) => {
         };
 
         await user.save();
-        console.log(`User subscription updated for ${user.email}`);
+       
         res.status(200).json("Subcription updated ");
       }
     } catch (error) {
@@ -162,7 +162,7 @@ app.post('/api/update-subscription', async (req, res) => {
           user.subscription.isActive = false;
   
           await user.save();
-          console.log(`User subscription updated for ${user.email}`);
+          
           res.status(200).json("Subcription updated ");
         }
       } catch (error) {
@@ -175,7 +175,7 @@ app.post('/api/update-subscription', async (req, res) => {
   app.post('/api/check-subscription', async (req, res) => {
     try {
       const { userId } = req.body
-      console.log(userId);
+     
       const user = await User.findById(userId); // Assuming req.userId is set by some authentication middleware
  
       if (!user) {
