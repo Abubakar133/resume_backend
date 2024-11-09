@@ -11,6 +11,9 @@ import insurenceRoute from "./routers/insurenceRoute.mjs";
 import userdata from "./routers/userdataroutes.mjs";
 import User from "./models/userModel.mjs";
 
+import checkoutController from './controllers/checkoutController.mjs';
+import { makeRequest } from './Helpers/rapydUtilities.mjs'; 
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -48,8 +51,38 @@ app.use("/api/auth", authRoute);
 app.use("/api/", insurenceRoute);
 app.use("/api/userdata/", userdata);
 
+app.post('/api/create-checkout-session', (req, res, next) => {
+  checkoutController.createCheckout(req, res, next);
+});
 
-app.post('/api/create-checkout-session', async (req, res) => {
+app.get("/country/:code", async (req, res) => {
+  const { code } = req.params;
+  try {
+    const result = await makeRequest(
+      "GET",
+      `/v1/payment_methods/country?country=${code}`
+    );
+
+    res.json(result);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+app.get("/fields/:type", async (req, res) => {
+  const { type } = req.params;
+  try {
+    const result = await makeRequest(
+      "GET",
+      `/v1/payment_methods/required_fields/${type}`
+    );
+    res.json(result);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+app.post('/api/create-checkout-session2', async (req, res) => {
   try {
   const { userId } = req.body;
 
@@ -99,7 +132,7 @@ app.post('/api/update-subscription', async (req, res) => {
     const user = await User.findById(userId);
       if (user) {
         const currentDate = new Date();
-        const endDate = new Date(currentDate.setDate(currentDate.getDate() + 30)); // Set end date 30 days from now
+        const endDate = new Date(currentDate.setDate(currentDate.getDate() + 30)); 
 
         // Update subscription details
         user.subscription = {
