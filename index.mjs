@@ -126,7 +126,7 @@ app.post('/api/create-checkout-session2', async (req, res) => {
 app.post('/api/update-subscription', async (req, res) => {
   
   const { userId } = req.body;
-    console.log(userId);
+    
   try {
     
     const user = await User.findById(userId);
@@ -134,7 +134,7 @@ app.post('/api/update-subscription', async (req, res) => {
         const currentDate = new Date();
         const endDate = new Date(currentDate.setDate(currentDate.getDate() + 30)); 
 
-        // Update subscription details
+        
         user.subscription = {
           endDate: endDate,
           isActive: true,
@@ -142,13 +142,34 @@ app.post('/api/update-subscription', async (req, res) => {
 
         await user.save();
         console.log(`User subscription updated for ${user.email}`);
-        res.status(200).json({ error: 'Internal server error' });
+        res.status(200).json("Subcription updated ");
       }
     } catch (error) {
       console.error('Error updating user subscription:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+  app.post('/api/update-subscription2', async (req, res) => {
+  
+    const { userId } = req.body;
+      
+    try {
+      
+      const user = await User.findById(userId);
+        if (user) {
+        
+          user.subscription.isActive = false;
+  
+          await user.save();
+          console.log(`User subscription updated for ${user.email}`);
+          res.status(200).json("Subcription updated ");
+        }
+      } catch (error) {
+        console.error('Error updating user subscription:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+    });
 
   // Return a 200 response to acknowledge receipt of the event
   app.post('/api/check-subscription', async (req, res) => {
